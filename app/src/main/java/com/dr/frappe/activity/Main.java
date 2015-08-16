@@ -1,16 +1,29 @@
-package com.dr.frappe;
+package com.dr.frappe.activity;
 
+import android.app.UiAutomation;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 
-public class Main extends AppCompatActivity {
+import com.dr.frappe.R;
+import com.dr.frappe.model.ExpenseDTO;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Main extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // lets load the initial set of expenses for this user
+        List<ExpenseDTO> listExpenses = getExpenses();
+
     }
 
     @Override
@@ -34,4 +47,15 @@ public class Main extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    private List<ExpenseDTO> getExpenses() {
+        List<ExpenseDTO> tempList = new ArrayList<ExpenseDTO>();
+        return tempList;
+    }
+    
 }
