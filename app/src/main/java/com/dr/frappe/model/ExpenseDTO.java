@@ -11,6 +11,7 @@ import java.util.Date;
 public class ExpenseDTO implements Serializable, Comparable<ExpenseDTO> {
 
     private String expenseHead;
+    private String expenseDescription;
     private double expenseAmount;
     private String expenseCurrency;
 
@@ -40,7 +41,6 @@ public class ExpenseDTO implements Serializable, Comparable<ExpenseDTO> {
     public String getExpenseHead() {
         return expenseHead;
     }
-
     public void setExpenseHead(String expenseHead) {
         this.expenseHead = expenseHead;
     }
@@ -48,7 +48,6 @@ public class ExpenseDTO implements Serializable, Comparable<ExpenseDTO> {
     public double getExpenseAmount() {
         return expenseAmount;
     }
-
     public void setExpenseAmount(double expenseAmount) {
         this.expenseAmount = expenseAmount;
     }
@@ -56,7 +55,6 @@ public class ExpenseDTO implements Serializable, Comparable<ExpenseDTO> {
     public String getExpenseCurrency() {
         return expenseCurrency;
     }
-
     public void setExpenseCurrency(String expenseCurrency) {
         this.expenseCurrency = expenseCurrency;
     }
@@ -64,7 +62,6 @@ public class ExpenseDTO implements Serializable, Comparable<ExpenseDTO> {
     public Location getExpenseLocation() {
         return expenseLocation;
     }
-
     public void setExpenseLocation(Location expenseLocation) {
         this.expenseLocation = expenseLocation;
     }
@@ -72,9 +69,15 @@ public class ExpenseDTO implements Serializable, Comparable<ExpenseDTO> {
     public long getExpenseRecordedAt() {
         return expenseRecordedAt;
     }
-
     public void setExpenseRecordedAt(long expenseRecordedAt) {
         this.expenseRecordedAt = expenseRecordedAt;
+    }
+
+    public String getExpenseDescription() {
+        return expenseDescription;
+    }
+    public void setExpenseDescription(String expenseDescription) {
+        this.expenseDescription = expenseDescription;
     }
 
     /**

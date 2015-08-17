@@ -18,12 +18,13 @@ import java.util.List;
  * Created by rohitman on 8/16/2015.
  */
 public class ExpenseListAdapter extends ArrayAdapter<ExpenseDTO> {
-    private Context thisContext;
+    private Context context;
     private List<ExpenseDTO> expenseDTOList;
 
 
-    public ExpenseListAdapter(Context context, int resource, List<ExpenseDTO> objects) {
-        super(context, resource, objects);
+    public ExpenseListAdapter(Context context, List<ExpenseDTO> objects) {
+        super(context, R.layout.l_expense_item, objects);
+        this.context = context;
         this.expenseDTOList = objects;
     }
 
@@ -40,7 +41,7 @@ public class ExpenseListAdapter extends ArrayAdapter<ExpenseDTO> {
         // create the view of an expense item
         // TODO: avoid creating a new view each time. Use the getView method to recycle views
         View viewOneExpense = null;
-        LayoutInflater inflater = (LayoutInflater)thisContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         viewOneExpense = inflater.inflate(R.layout.l_expense_item, parent, false);
 
         // now set the different data points

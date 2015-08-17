@@ -7,8 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ListView;
 
 import com.dr.frappe.R;
+import com.dr.frappe.activity.expense.ExpenseListAdapter;
 import com.dr.frappe.model.ExpenseDTO;
 
 import java.util.ArrayList;
@@ -23,7 +25,8 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
 
         // lets load the initial set of expenses for this user
         List<ExpenseDTO> listExpenses = getExpenses();
-
+        ListView listExpensesView = (ListView) findViewById(R.id.main_expense_list);
+        listExpensesView.setAdapter(new ExpenseListAdapter(this, listExpenses));
     }
 
     @Override
@@ -55,7 +58,10 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
 
     private List<ExpenseDTO> getExpenses() {
         List<ExpenseDTO> tempList = new ArrayList<ExpenseDTO>();
+        tempList.add(new ExpenseDTO(1));
+        tempList.add(new ExpenseDTO(2));
+        tempList.add(new ExpenseDTO(3));
         return tempList;
     }
-    
+
 }
