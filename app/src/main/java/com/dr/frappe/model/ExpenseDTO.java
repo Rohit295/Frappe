@@ -23,15 +23,18 @@ public class ExpenseDTO implements Serializable, Comparable<ExpenseDTO> {
         expenseRecordedAt = System.currentTimeMillis();
 
         if (counter == 1) {
-            expenseHead = "Groceries shopping";
+            expenseHead = "Household Expenses";
+            expenseDescription = "Groceries shopping";
             expenseAmount = 132.54;
             expenseCurrency = "INR";
         } else if (counter == 2) {
-            expenseHead = "Sweets at Sweet Basket";
+            expenseHead = "Eating Out";
+            expenseDescription = "Sweets at Sweet Basket";
             expenseAmount = 87.50;
             expenseCurrency = "INR";
         } else if (counter == 3) {
-            expenseHead = "Bata Shoes for all 3 of us";
+            expenseHead = "Personal Expenses";
+            expenseDescription = "Bata Shoes for all 3 of us";
             expenseAmount = 4965.99;
             expenseCurrency = "INR";
         }
