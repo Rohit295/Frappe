@@ -18,6 +18,8 @@ public class ExpenseDTO implements Serializable, Comparable<ExpenseDTO> {
     private Location expenseLocation;
     private long expenseRecordedAt;
 
+    public ExpenseDTO() {
+    }
 
     public ExpenseDTO(int counter) {
         expenseRecordedAt = System.currentTimeMillis();

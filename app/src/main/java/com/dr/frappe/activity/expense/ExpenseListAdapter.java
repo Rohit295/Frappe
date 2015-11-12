@@ -21,7 +21,15 @@ public class ExpenseListAdapter extends ArrayAdapter<ExpenseDTO> {
     private Context context;
     private List<ExpenseDTO> expenseDTOList;
 
+    public List<ExpenseDTO> getExpenseDTOList() {
+        return expenseDTOList;
+    }
+    public void setExpenseDTOList(List<ExpenseDTO> expenseDTOList) {
+        this.expenseDTOList = expenseDTOList;
+        notifyDataSetChanged();
+    }
 
+    // Todo: can ExpenseListAdapter do without the list being passed in through constructor
     public ExpenseListAdapter(Context context, List<ExpenseDTO> objects) {
         super(context, R.layout.l_expense_item, objects);
         this.context = context;
