@@ -1,6 +1,5 @@
 package com.dr.frappe.activity;
 
-import android.app.UiAutomation;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -8,12 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 
 import com.dr.frappe.R;
-import com.dr.frappe.activity.expense.ExpenseAsyncList;
+import com.dr.frappe.activity.expense.ExpenseListAsyncTask;
 import com.dr.frappe.activity.expense.ExpenseListAdapter;
 import com.dr.frappe.activity.expense.NewExpenseDialogFragment;
 import com.dr.frappe.api.ClientController;
@@ -24,8 +21,13 @@ import java.util.List;
 
 public class Main extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
-    ListView listExpensesView;
-    ArrayAdapter expenseListAdapter = new ExpenseListAdapter(this, null);
+    private ListView listExpensesView;
+    private ExpenseListAdapter expenseListAdapter;
+
+    public ExpenseListAdapter getExpenseListAdapter() {return expenseListAdapter; }
+    public void setExpenseListAdapter(ExpenseListAdapter expenseListAdapter) {
+        this.expenseListAdapter = expenseListAdapter;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,17 +36,19 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
 
         ClientController.createInstance();
 
-        // lets load the initial set of expenses for this user
-        List<ExpenseDTO> listExpenses = getExpenses();
+        // lets load the initial set of expenses for this user. getExpenses will return an initial
+        // list to show (blank list basically) and load the real list asynchronously
         listExpensesView = (ListView) findViewById(R.id.main_expense_list);
-        listExpensesView.setAdapter(new ExpenseListAdapter(this, listExpenses));
+        List<ExpenseDTO> listExpenses = getExpenses();
+        listExpensesView.setAdapter(expenseListAdapter);
 
         // add a handler to create a new expense
         FloatingActionButton newExpense = (FloatingActionButton) findViewById(R.id.main_expense_add_new);
         newExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                new NewExpenseDialogFragment().show(getFragmentManager(), "New_Expense");
+                NewExpenseDialogFragment newExpenseFragment = new NewExpenseDialogFragment();
+                newExpenseFragment.show(getFragmentManager(), "New_Expense");
             }
         });
     }
@@ -79,12 +83,15 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
     private List<ExpenseDTO> getExpenses() {
         List<ExpenseDTO> tempList = new ArrayList<ExpenseDTO>();
         tempList.add(new ExpenseDTO(1));
+        /*
         tempList.add(new ExpenseDTO(2));
         tempList.add(new ExpenseDTO(3));
+        tempList.add(new ExpenseDTO(4));
+        tempList.add(new ExpenseDTO(5));
+        */
 
-        new ExpenseAsyncList(expenseListAdapter).execute("rohit");
-
+        expenseListAdapter = new ExpenseListAdapter(this, tempList);
+        new ExpenseListAsyncTask(expenseListAdapter).execute("rohit");
         return tempList;
     }
-
 }

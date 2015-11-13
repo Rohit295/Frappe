@@ -1,6 +1,7 @@
 package com.dr.frappe.activity.expense;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,10 @@ public class ExpenseListAdapter extends ArrayAdapter<ExpenseDTO> {
         return expenseDTOList;
     }
     public void setExpenseDTOList(List<ExpenseDTO> expenseDTOList) {
+        // Clear the Array Adapter list and add the new elements in here. Notify the change
         this.expenseDTOList = expenseDTOList;
+        this.clear();
+        this.addAll(expenseDTOList);
         notifyDataSetChanged();
     }
 
@@ -33,7 +37,7 @@ public class ExpenseListAdapter extends ArrayAdapter<ExpenseDTO> {
     public ExpenseListAdapter(Context context, List<ExpenseDTO> objects) {
         super(context, R.layout.l_expense_item, objects);
         this.context = context;
-        this.expenseDTOList = objects;
+        expenseDTOList = objects;
     }
 
     /**
@@ -45,6 +49,7 @@ public class ExpenseListAdapter extends ArrayAdapter<ExpenseDTO> {
      */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
+        Log.i(this.getClass().getName(), "About to build view for #" + position);
 
         // create the view of an expense item
         // TODO: avoid creating a new view each time. Use the getView method to recycle views
@@ -54,6 +59,7 @@ public class ExpenseListAdapter extends ArrayAdapter<ExpenseDTO> {
 
         // now set the different data points
         ExpenseDTO oneExpenseToRender = expenseDTOList.get(position);
+        Log.i(this.getClass().getName(), "Building Element - with Head: " + oneExpenseToRender.getExpenseHead());
 
         TextView expenseDescription = (TextView)viewOneExpense.findViewById(R.id.lei_expense_description);
         expenseDescription.setText(oneExpenseToRender.getExpenseHead());

@@ -30,4 +30,5 @@ dependencies {
     compile 'com.fasterxml.jackson.core:jackson-annotations:2.4.1'
     compile 'com.fasterxml.jackson.core:jackson-databind:2.4.1'
     compile files('libs/common-1.0.jar')
+    compile project(':model')
 }
