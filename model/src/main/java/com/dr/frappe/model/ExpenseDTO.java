@@ -1,7 +1,5 @@
 package com.dr.frappe.model;
 
-import android.location.Location;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,7 +13,7 @@ public class ExpenseDTO implements Serializable, Comparable<ExpenseDTO> {
     private double expenseAmount;
     private String expenseCurrency;
 
-    private Location expenseLocation;
+    //private Location expenseLocation;
     private long expenseRecordedAt;
 
     public ExpenseDTO() {
@@ -64,12 +62,14 @@ public class ExpenseDTO implements Serializable, Comparable<ExpenseDTO> {
         this.expenseCurrency = expenseCurrency;
     }
 
+    /*
     public Location getExpenseLocation() {
         return expenseLocation;
     }
     public void setExpenseLocation(Location expenseLocation) {
         this.expenseLocation = expenseLocation;
     }
+    */
 
     public long getExpenseRecordedAt() {
         return expenseRecordedAt;
