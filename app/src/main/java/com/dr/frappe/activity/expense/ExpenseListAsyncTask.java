@@ -1,6 +1,7 @@
 package com.dr.frappe.activity.expense;
 
 import android.os.AsyncTask;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
 import com.dr.frappe.api.ClientController;
@@ -13,9 +14,14 @@ import java.util.List;
  */
 public class ExpenseListAsyncTask extends AsyncTask<String, Integer, List<ExpenseDTO>> {
     private ExpenseListAdapter expenseListAdapter;
+    private ExpenseRecyclerAdapter expenseRecyclerAdapter;
 
     public ExpenseListAsyncTask(ExpenseListAdapter expenseListAdapter) {
         this.expenseListAdapter = expenseListAdapter;
+    }
+
+    public ExpenseListAsyncTask(ExpenseRecyclerAdapter expenseRecyclerAdapter) {
+        this.expenseRecyclerAdapter = expenseRecyclerAdapter;
     }
 
     @Override
@@ -29,6 +35,11 @@ public class ExpenseListAsyncTask extends AsyncTask<String, Integer, List<Expens
     @Override
     protected void onPostExecute(List<ExpenseDTO> expenseDTOs) {
         super.onPostExecute(expenseDTOs);
-        expenseListAdapter.setExpenseDTOList(expenseDTOs);
+
+        // Todo - one of these has to go
+        if (expenseListAdapter != null)
+            expenseListAdapter.setExpenseDTOList(expenseDTOs);
+        else if (expenseRecyclerAdapter != null)
+            expenseRecyclerAdapter.setExpenseDTOList(expenseDTOs);
     }
 }

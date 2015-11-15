@@ -72,6 +72,13 @@ public class ExpenseRecyclerAdapter extends RecyclerView.Adapter<ExpenseRecycler
         return expenseDTOList.size();
     }
 
+    public List<ExpenseDTO> getExpenseDTOList() { return expenseDTOList; }
+    public void setExpenseDTOList(List<ExpenseDTO> expenseDTOList) {
+        // Clear the Array Adapter list and add the new elements in here. Notify the change
+        this.expenseDTOList = expenseDTOList;
+        notifyDataSetChanged();
+    }
+
     /**
      * Class: ViewHolder for the RecyclerView Adapter
      */

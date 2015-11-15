@@ -10,9 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.dr.frappe.R;
+import com.dr.frappe.activity.expense.ExpenseListAsyncTask;
 import com.dr.frappe.activity.expense.ExpenseRecyclerItemDecoration;
 import com.dr.frappe.activity.expense.NewExpenseDialogFragment;
 import com.dr.frappe.activity.expense.ExpenseRecyclerAdapter;
+import com.dr.frappe.api.ClientController;
 import com.dr.frappe.model.ExpenseDTO;
 
 import java.util.ArrayList;
@@ -26,6 +28,8 @@ public class ExpenseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense);
+
+        ClientController.createInstance();
 
         // Build the RecyclerView. Add an ItemDecorator so that each item in the list is decorated
         // (space, divider between items etc.). Finally set LayoutManager and Adapter of items
@@ -84,6 +88,8 @@ public class ExpenseActivity extends AppCompatActivity {
         tempList.add(new ExpenseDTO(5));
 
         expenseRVAdapter = new ExpenseRecyclerAdapter(tempList);
+        new ExpenseListAsyncTask((ExpenseRecyclerAdapter)expenseRVAdapter).execute("Rohit");
+
         return tempList;
     }
 }

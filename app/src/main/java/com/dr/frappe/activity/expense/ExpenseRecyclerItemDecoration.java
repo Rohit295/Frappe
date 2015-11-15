@@ -33,17 +33,17 @@ public class ExpenseRecyclerItemDecoration extends RecyclerView.ItemDecoration {
      */
     @Override
     public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) {
-        // set a top and bottom for all elements except the first and the last
-        if ((parent.getChildAdapterPosition(view) == 0) ||
-                (parent.getChildAdapterPosition(view) != parent.getAdapter().getItemCount() - 1)) {
+        // set all dimensions for all elements except the last. For last, set everthing except bottom
+        outRect.top = (int)context.getResources().getDimension(R.dimen.expense_recyclerview_top);
+        outRect.left = (int)context.getResources().getDimension(R.dimen.expense_recyclerview_right);
+        outRect.right = (int)context.getResources().getDimension(R.dimen.expense_recyclerview_left);
+        outRect.bottom = 0;
+        if (parent.getChildAdapterPosition(view) != parent.getAdapter().getItemCount() - 1) {
             outRect.bottom = (int)context.getResources().getDimension(R.dimen.expense_recyclerview_bottom);
-            outRect.top = (int)context.getResources().getDimension(R.dimen.expense_recyclerview_top);
-            outRect.left = (int)context.getResources().getDimension(R.dimen.expense_recyclerview_right);
-            outRect.right = (int)context.getResources().getDimension(R.dimen.expense_recyclerview_left);
-
-            Log.i(this.getClass().getName(), "Building item decoration for #" + parent.getChildAdapterPosition(view) +
-                "; Dimensions: " + outRect.left + "/" + outRect.top + "/" + outRect.right + "/" + outRect.bottom);
         }
+
+        Log.i(this.getClass().getName(), "Building item decoration for #" + parent.getChildAdapterPosition(view) +
+                "; Dimensions: " + outRect.left + "/" + outRect.top + "/" + outRect.right + "/" + outRect.bottom);
     }
 
     /**
@@ -58,7 +58,7 @@ public class ExpenseRecyclerItemDecoration extends RecyclerView.ItemDecoration {
     @Override
     public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) {
         // Get the Divider to use
-        Drawable divider = context.getDrawable(R.drawable.expense_recyclerview_divider);
+        Drawable divider = context.getResources().getDrawable(R.drawable.expense_recyclerview_divider);
 
         int left = parent.getPaddingLeft() + 50;
         int right = parent.getWidth() - parent.getPaddingRight() - 50;
