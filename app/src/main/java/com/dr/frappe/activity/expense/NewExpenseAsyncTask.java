@@ -6,12 +6,14 @@ import android.util.Log;
 import com.dr.frappe.api.ClientController;
 import com.dr.frappe.model.ExpenseDTO;
 
+import java.util.List;
+
 /**
  * AsyncTask to save a new Expense DTO. Keeping the logic simple - for the current user, save this
  * expenseDTO. Once saved, the expense needs to get added to the ExpenseListAdapter, at the bottom
  * Created by rohitman on 11/13/2015.
  */
-public class NewExpenseAsyncTask extends AsyncTask<ExpenseDTO, Integer, Boolean> {
+public class NewExpenseAsyncTask extends AsyncTask<ExpenseDTO, Integer, ExpenseDTO> {
     private String userId;
     private ExpenseListAdapter expenseListAdapter;
 
@@ -21,7 +23,7 @@ public class NewExpenseAsyncTask extends AsyncTask<ExpenseDTO, Integer, Boolean>
     }
 
     @Override
-    protected Boolean doInBackground(ExpenseDTO... params) {
+    protected ExpenseDTO doInBackground(ExpenseDTO... params) {
         ExpenseDTO expenseToSave = (ExpenseDTO)params[0];
         Log.i(this.getClass().getName(), "About to save a new Expense: " +
                         expenseToSave.getExpenseHead() + "/" +
@@ -30,7 +32,7 @@ public class NewExpenseAsyncTask extends AsyncTask<ExpenseDTO, Integer, Boolean>
                         expenseToSave.getExpenseAmount());
 
         ClientController.getInstance().addExpense(expenseToSave, userId);
-        return Boolean.TRUE;
+        return expenseToSave;
     }
 
     /**
@@ -39,10 +41,12 @@ public class NewExpenseAsyncTask extends AsyncTask<ExpenseDTO, Integer, Boolean>
      * @param state
      */
     @Override
-    protected void onPostExecute(Boolean state) {
-        super.onPostExecute(state);
+    protected void onPostExecute(ExpenseDTO expenseDTO) {
+        super.onPostExecute(expenseDTO);
 
-        expenseListAdapter.getExpenseDTOList();
+        List<ExpenseDTO> listExpenses = expenseListAdapter.getExpenseDTOList();
+        listExpenses.add(expenseDTO);
+        expenseListAdapter.setExpenseDTOList(listExpenses);
         //expenseListAdapter.setExpenseDTOList(expenseDTOs);
     }
 

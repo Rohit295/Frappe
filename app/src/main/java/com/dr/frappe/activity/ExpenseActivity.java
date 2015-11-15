@@ -1,49 +1,42 @@
 package com.dr.frappe.activity;
 
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 
 import com.dr.frappe.R;
-import com.dr.frappe.activity.expense.ExpenseListAsyncTask;
-import com.dr.frappe.activity.expense.ExpenseListAdapter;
 import com.dr.frappe.activity.expense.NewExpenseDialogFragment;
-import com.dr.frappe.api.ClientController;
+import com.dr.frappe.activity.expense.ExpenseRecyclerAdapter;
 import com.dr.frappe.model.ExpenseDTO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main extends AppCompatActivity implements AdapterView.OnItemClickListener {
+public class ExpenseActivity extends AppCompatActivity {
+    private RecyclerView expenseRView;
+    private RecyclerView.LayoutManager expenseRViewLayout;
+    private RecyclerView.Adapter expenseRVAdapter;
 
-    private ListView listExpensesView;
-    private ExpenseListAdapter expenseListAdapter;
-
-    public ExpenseListAdapter getExpenseListAdapter() {return expenseListAdapter; }
-    public void setExpenseListAdapter(ExpenseListAdapter expenseListAdapter) {
-        this.expenseListAdapter = expenseListAdapter;
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_expense);
 
-        ClientController.createInstance();
+        // Build the RecyclerView. Set LayoutManager and Adapter of items
+        expenseRView =  (RecyclerView)findViewById(R.id.ae_expenseview);
+        expenseRViewLayout = new LinearLayoutManager(this);
+        expenseRView.setLayoutManager(expenseRViewLayout);
 
-        // lets load the initial set of expenses for this user. getExpenses will return an initial
-        // list to show (blank list basically) and load the real list asynchronously
-        listExpensesView = (ListView) findViewById(R.id.main_expense_list);
-        List<ExpenseDTO> listExpenses = getExpenses();
-        listExpensesView.setAdapter(expenseListAdapter);
+        // The Adapter needs to be prepped with the initial list so getExpenses list and then build adapter
+        getExpenses();
+        expenseRView.setAdapter(expenseRVAdapter);
 
         // add a handler to create a new expense
-        FloatingActionButton newExpense = (FloatingActionButton) findViewById(R.id.main_expense_add_new);
+        FloatingActionButton newExpense = (FloatingActionButton) findViewById(R.id.ae_add_new);
         newExpense.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -75,23 +68,19 @@ public class Main extends AppCompatActivity implements AdapterView.OnItemClickLi
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-    }
-
+    /**
+     *
+     * @return List of Expenses for the user
+     */
     private List<ExpenseDTO> getExpenses() {
         List<ExpenseDTO> tempList = new ArrayList<ExpenseDTO>();
         tempList.add(new ExpenseDTO(1));
-        /*
         tempList.add(new ExpenseDTO(2));
         tempList.add(new ExpenseDTO(3));
         tempList.add(new ExpenseDTO(4));
         tempList.add(new ExpenseDTO(5));
-        */
 
-        expenseListAdapter = new ExpenseListAdapter(this, tempList);
-        new ExpenseListAsyncTask(expenseListAdapter).execute("Rohit");
+        expenseRVAdapter = new ExpenseRecyclerAdapter(tempList);
         return tempList;
     }
 }

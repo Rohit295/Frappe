@@ -55,7 +55,6 @@ public class NewExpenseDialogFragment extends DialogFragment {
                         Double.parseDouble(((EditText) newExpenseView.findViewById(R.id.lne_amount)).getText().toString()));
                 expenseListAdapter = ((Main)holdingActivity).getExpenseListAdapter();
                 new NewExpenseAsyncTask("Rohit", expenseListAdapter).execute(expenseDTO);
-
             }
         });
 
