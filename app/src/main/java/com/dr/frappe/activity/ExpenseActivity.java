@@ -10,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.dr.frappe.R;
+import com.dr.frappe.activity.expense.ExpenseRecyclerItemDecoration;
 import com.dr.frappe.activity.expense.NewExpenseDialogFragment;
 import com.dr.frappe.activity.expense.ExpenseRecyclerAdapter;
 import com.dr.frappe.model.ExpenseDTO;
@@ -26,9 +27,11 @@ public class ExpenseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_expense);
 
-        // Build the RecyclerView. Set LayoutManager and Adapter of items
+        // Build the RecyclerView. Add an ItemDecorator so that each item in the list is decorated
+        // (space, divider between items etc.). Finally set LayoutManager and Adapter of items
         expenseRView =  (RecyclerView)findViewById(R.id.ae_expenseview);
         expenseRViewLayout = new LinearLayoutManager(this);
+        expenseRView.addItemDecoration(new ExpenseRecyclerItemDecoration(this));
         expenseRView.setLayoutManager(expenseRViewLayout);
 
         // The Adapter needs to be prepped with the initial list so getExpenses list and then build adapter
