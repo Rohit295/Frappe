@@ -4,4 +4,8 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
     </style>
 
+    <!-- Style for TextInputLayout to show floating hints for New Expense -->
+    <style name="TextAppearence.App.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/accent_material_light</item>
+    </style>
 </resources>

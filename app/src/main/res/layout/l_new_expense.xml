@@ -8,14 +8,14 @@
         android:id="@+id/lne_head"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:hint="@string/lne_head_hint"/>
+        android:hint="@string/ane_head_hint"/>
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/lne_description"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:hint="@string/lne_description_hint"/>
+        android:hint="@string/ane_description_hint"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp">
@@ -24,16 +24,16 @@
             android:layout_height="match_parent"
             android:id="@+id/lne_currency"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:hint="@string/lne_curency_hint"/>
+            android:hint="@string/ane_curency_hint"/>
         <EditText
-            android:layout_width="fill_parent"
+            android:layout_width="75dp"
             android:layout_height="match_parent"
             android:inputType="numberDecimal"
             android:id="@+id/lne_amount"
             android:ems="10"
             android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:hint="@string/lne_amount_hint"/>
+            android:hint="@string/ane_amount_hint"/>
+
     </LinearLayout>
+
 </LinearLayout>

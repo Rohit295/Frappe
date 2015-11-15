@@ -4,10 +4,11 @@
     >
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:textSize="25sp"
+        android:layout_height="40dp"
+        android:textSize="20sp"
         android:textColor="#6C6C6C"
-        android:id="@+id/lei_expense_description"/>
+        android:id="@+id/lei_expense_description"
+        android:hint="@string/ane_description_hint"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -17,28 +18,30 @@
             android:layout_width="0dip"
             android:layout_weight=".15"
             android:layout_height="match_parent"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="#6C6C6C"
-            android:id="@+id/lei_expense_currency"/>
+            android:id="@+id/lei_expense_currency"
+            android:hint="@string/ane_curency_hint"/>
         <TextView
             android:layout_width="0dip"
             android:layout_weight=".35"
             android:layout_height="match_parent"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="#6C6C6C"
-            android:id="@+id/lei_expense_amount"/>
+            android:id="@+id/lei_expense_amount"
+            android:hint="@string/ane_amount_hint"/>
         <TextView
             android:layout_width="0dip"
             android:layout_weight=".10"
             android:layout_height="match_parent"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="#6C6C6C"
             android:text="on"/>
         <TextView
             android:layout_width="0dip"
             android:layout_weight=".35"
             android:layout_height="match_parent"
-            android:textSize="22sp"
+            android:textSize="18sp"
             android:textColor="#6C6C6C"
             android:id="@+id/lei_expense_date"/>
     </LinearLayout>

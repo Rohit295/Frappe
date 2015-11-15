@@ -1,5 +1,7 @@
 package com.dr.frappe.activity;
 
+import android.app.ActionBar;
+import android.content.Intent;
 import android.support.design.widget.FloatingActionButton;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -20,7 +22,7 @@ import com.dr.frappe.model.ExpenseDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExpenseActivity extends AppCompatActivity {
+public class ExpenseActivity extends AppCompatActivity implements View.OnClickListener {
     private RecyclerView expenseRView;
     private RecyclerView.LayoutManager expenseRViewLayout;
     private RecyclerView.Adapter expenseRVAdapter;
@@ -44,13 +46,10 @@ public class ExpenseActivity extends AppCompatActivity {
 
         // add a handler to create a new expense
         FloatingActionButton newExpense = (FloatingActionButton) findViewById(R.id.ae_add_new);
-        newExpense.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                NewExpenseDialogFragment newExpenseFragment = new NewExpenseDialogFragment();
-                newExpenseFragment.show(getFragmentManager(), "New_Expense");
-            }
-        });
+        newExpense.setOnClickListener(this);
+
+        // Dont want to show the Title in the ActionBar, so doing this
+        //getSupportActionBar().setDisplayShowTitleEnabled(false);
     }
 
     @Override
@@ -91,5 +90,16 @@ public class ExpenseActivity extends AppCompatActivity {
         new ExpenseListAsyncTask((ExpenseRecyclerAdapter)expenseRVAdapter).execute("Rohit");
 
         return tempList;
+    }
+
+    /**
+     * Use the onClick Handler to handle the FAB New Expense Action
+     * Every time this is pressed, create a new Activity to accept new expense as input
+     * @param v
+     */
+    @Override
+    public void onClick(View v) {
+        Intent newExpenseActivity = new Intent(this, NewExpenseActivity.class);
+        startActivity(newExpenseActivity);
     }
 }

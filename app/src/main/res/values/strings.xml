@@ -1,10 +1,13 @@
 <resources>
     <string name="app_name">Frappe</string>
+    <string name="new_expense_name">New Expense</string>
 
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    <string name="lne_description_hint">description</string>
-    <string name="lne_head_hint">head</string>
-    <string name="lne_amount_hint">amount</string>
-    <string name="lne_curency_hint">currency</string>
+
+    <string name="ane_description_hint">description</string>
+    <string name="ane_head_hint">head</string>
+    <string name="ane_amount_hint">amount</string>
+    <string name="ane_curency_hint">currency</string>
+    <string name="ane_date_hint">date</string>
 </resources>
