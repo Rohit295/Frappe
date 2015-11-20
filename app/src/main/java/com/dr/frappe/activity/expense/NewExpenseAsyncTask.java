@@ -1,8 +1,10 @@
 package com.dr.frappe.activity.expense;
 
+import android.content.Context;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.dr.frappe.activity.NewExpenseActivity;
 import com.dr.frappe.api.ClientController;
 import com.dr.frappe.model.ExpenseDTO;
 
@@ -15,11 +17,11 @@ import java.util.List;
  */
 public class NewExpenseAsyncTask extends AsyncTask<ExpenseDTO, Integer, ExpenseDTO> {
     private String userId;
-    private ExpenseListAdapter expenseListAdapter;
+    private Context invokingActivity;
 
-    public NewExpenseAsyncTask(String userId, ExpenseListAdapter expenseListAdapter) {
+    public NewExpenseAsyncTask(String userId, Context invokingActivity) {
         this.userId = userId;
-        this.expenseListAdapter = expenseListAdapter;
+        this.invokingActivity = invokingActivity;
     }
 
     @Override
@@ -38,16 +40,14 @@ public class NewExpenseAsyncTask extends AsyncTask<ExpenseDTO, Integer, ExpenseD
     /**
      * postExecute is important here. Once the ExpenseDTO is successfully saved, the same Expense
      * needs to be added to the ListView so that user can start seeing it
-     * @param state
+     * @param expenseDTO
      */
     @Override
     protected void onPostExecute(ExpenseDTO expenseDTO) {
         super.onPostExecute(expenseDTO);
-
-        List<ExpenseDTO> listExpenses = expenseListAdapter.getExpenseDTOList();
-        listExpenses.add(expenseDTO);
-        expenseListAdapter.setExpenseDTOList(listExpenses);
-        //expenseListAdapter.setExpenseDTOList(expenseDTOs);
+        if (invokingActivity instanceof NewExpenseActivity) {
+            ((NewExpenseActivity)invokingActivity).updateExpenseMainList(expenseDTO);
+        }
     }
 
 }
